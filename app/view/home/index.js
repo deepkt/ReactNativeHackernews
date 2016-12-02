@@ -10,7 +10,27 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 
+// Story Service Client
+import storyService from '../../service/story';
+
 export default class helloworld extends Component {
+
+  componentDidMount() {
+    const that = this;
+    storyService.getNewStories()
+      .then((result) => {
+        console.log('result2');
+        console.log(typeof(result));
+        that.setState({
+          stories: result,
+          loaded: true
+        });
+      })
+      .catch((error) => {
+        console.log('Request failed', error);
+      });
+  };
+
   render() {
     return (
       <View style={styles.container}>
