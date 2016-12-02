@@ -16,6 +16,14 @@ import Menu from './menu';
 
 export default class index extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loaded: false
+    };
+  }
+
   componentDidMount() {
     const that = this;
     storyService.getNewStories()
@@ -33,31 +41,28 @@ export default class index extends Component {
   };
 
   // Loading Message
-  showLoadingMessage() {
+  renderLoadingMessage() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Hackernews!
-        </Text>
+      <Text style={styles.welcome}>
+        Hackernews is loading...
+      </Text>
+    );
+  };
 
-        <TouchableHighlight style={styles.settingsButton} onPress={Actions.settings}>
-          <Text style={styles.settingsText}>
-            Settings
-          </Text>
-        </TouchableHighlight>
-      </View>
+  // Loading Message
+  renderNewsList() {
+    return (
+      <Text style={styles.welcome}>
+        Hackernews is ready
+      </Text>
     );
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Hackernews!
-        </Text>
-
         <Menu></Menu>
-        
+        {(this.state.loaded) ? this.renderNewsList() : this.renderLoadingMessage()}
       </View>
     );
   }
