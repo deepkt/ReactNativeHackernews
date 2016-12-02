@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  ListView
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -13,12 +14,12 @@ import { Actions } from 'react-native-router-flux';
 // Story Service Client
 import storyService from '../../service/story';
 import Menu from './menu';
+import StoryListItem from './storyListItem';
 
 export default class index extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       loaded: false
     };
@@ -28,10 +29,9 @@ export default class index extends Component {
     const that = this;
     storyService.getNewStories()
       .then((result) => {
-        console.log('result');
-        console.log(result);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         that.setState({
-          stories: result,
+          stories: ds.cloneWithRows(result),
           loaded: true
         });
       })
@@ -52,16 +52,18 @@ export default class index extends Component {
   // Loading Message
   renderNewsList() {
     return (
-      <Text style={styles.welcome}>
-        Hackernews is ready
-      </Text>
+      <ListView
+          style={styles.storylistContainer}
+          dataSource={this.state.stories}
+          renderRow={(storyId) => <StoryListItem storyId={storyId}/>}
+        />
     );
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Menu></Menu>
+        <Menu/>
         {(this.state.loaded) ? this.renderNewsList() : this.renderLoadingMessage()}
       </View>
     );
@@ -71,8 +73,9 @@ export default class index extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
   welcome: {
@@ -80,14 +83,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10
   },
-  settingsButton: {
-    position: 'absolute',
-    right: 10,
-    top: 80
-  },
-  settingsText: {
-    textAlign: 'right',
-    color: '#333333'
+  storylistContainer: {
+    marginTop:100,
+    flex: 1,
+    flexDirection: 'column',
   }
 });
 

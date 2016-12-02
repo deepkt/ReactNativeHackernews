@@ -10,13 +10,13 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 
-export default class menu extends Component {
+export default class storyListItem extends Component {
   // Render home menu
   render() {
     return (
       <TouchableHighlight style={styles.settingsButton} onPress={Actions.settings}>
         <Text style={styles.settingsText}>
-          Settings
+          {this.props.storyId}
         </Text>
       </TouchableHighlight>
     );
@@ -25,15 +25,15 @@ export default class menu extends Component {
 
 const styles = StyleSheet.create({
   settingsButton: {
-    position: 'absolute',
-    right: 10,
-    top: 80,
-    // backgroundColor: '#F5FCFF'
+    height:50,
+    padding: 10,
+    borderTopColor: '#CCCCCC',
+    borderTopWidth: StyleSheet.hairlineWidth
   },
   settingsText: {
-    textAlign: 'right',
+    textAlign: 'left',
     color: '#333333'
   }
 });
 
-AppRegistry.registerComponent('menu', () => menu);
+AppRegistry.registerComponent('storyListItem', () => storyListItem);
