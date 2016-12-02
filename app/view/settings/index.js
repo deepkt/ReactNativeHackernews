@@ -12,16 +12,10 @@ import {
   View
 } from 'react-native';
 
-export default class helloworld extends Component {
+export default class index extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Suresh!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
@@ -50,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('helloworld', () => helloworld);
+AppRegistry.registerComponent('index', () => index);

@@ -12,15 +12,16 @@ import { Actions } from 'react-native-router-flux';
 
 // Story Service Client
 import storyService from '../../service/story';
+import Menu from './menu';
 
-export default class helloworld extends Component {
+export default class index extends Component {
 
   componentDidMount() {
     const that = this;
     storyService.getNewStories()
       .then((result) => {
-        console.log('result2');
-        console.log(typeof(result));
+        console.log('result');
+        console.log(result);
         that.setState({
           stories: result,
           loaded: true
@@ -31,7 +32,8 @@ export default class helloworld extends Component {
       });
   };
 
-  render() {
+  // Loading Message
+  showLoadingMessage() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -43,6 +45,19 @@ export default class helloworld extends Component {
             Settings
           </Text>
         </TouchableHighlight>
+      </View>
+    );
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Welcome to Hackernews!
+        </Text>
+
+        <Menu></Menu>
+        
       </View>
     );
   }
@@ -71,4 +86,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('helloworld', () => helloworld);
+AppRegistry.registerComponent('index', () => index);
