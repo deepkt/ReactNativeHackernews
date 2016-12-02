@@ -9,3 +9,11 @@ exports.getNewStories = function getNewStories() {
         return _.first(responseJson, 20);;
     });
 };
+
+exports.getNewsItem = function getNewsItem(itemId) {
+  const url = 'https://hacker-news.firebaseio.com/v0/item/' + itemId + '.json?print=pretty';
+  return BaseService(url)
+    .then((responseJson) => {
+        return responseJson;
+    });
+};

@@ -13,6 +13,7 @@ import { Actions } from 'react-native-router-flux';
 
 // Story Service Client
 import storyService from '../../service/story';
+
 import Menu from './menu';
 import StoryListItem from './storyListItem';
 
@@ -23,7 +24,7 @@ export default class index extends Component {
     this.state = {
       loaded: false
     };
-  }
+  };
 
   componentDidMount() {
     const that = this;
@@ -76,17 +77,19 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     // justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#cccccc'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10
+    margin: 10,
+    marginTop: 150
   },
   storylistContainer: {
     marginTop:100,
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: '#F5FCFF'
   }
 });
 
